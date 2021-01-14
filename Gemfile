@@ -28,6 +28,10 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'httparty'
+
+gem 'delayed_job_active_record'
+
 group :development, :test do
   gem 'pry', '~> 0.13.1'
 
