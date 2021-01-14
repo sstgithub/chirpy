@@ -1,10 +1,14 @@
 class ChirpsController < ApplicationController
-  before_action :set_chirp, only: [:show, :edit, :update, :destroy]
+  before_action :set_chirp, only: [:show, :update, :destroy, :upvote]
 
   # GET /chirps
   # GET /chirps.json
   def index
     @chirps = Chirp.all.order(created_at: :desc)
+  end
+
+  def upvote
+    @chirp.update(upvote: @chirp.upvote + 1)
   end
 
   # GET /chirps/1

@@ -9,6 +9,6 @@ class ChirpNotificationService
   end
 
   def send_push_notification
-    self.class.post('/post', body: { chirp_id: @chirp_id })
+    self.class.post('/push', body: { chirp_id: @chirp_id })
   end
 end
