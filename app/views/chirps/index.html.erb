@@ -3,7 +3,9 @@
 <h1>Chirps</h1>
 
 <ul>
-  <% @chirps.each do |chirp| %>
-    <li><%= chirp.id %> -- <%= chirp.text %></li>
+  <% @chirps.each_with_index do |chirp, index| %>
+    <li><%= index + 1 %> -- <%= chirp.text.upcase %> | <%= link_to 'Destroy', chirp, method: :delete %></li>
   <% end %>
 </ul>
+
+<%= link_to 'New Chirp', new_chirp_path %>
