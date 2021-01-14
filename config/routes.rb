@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :chirps do
-    member { put 'upvote' }
+    member { put 'vote' }
   end
   get '/index', to: 'chirps#index'
   get '/', to: 'chirps#index'

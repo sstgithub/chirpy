@@ -1,14 +1,29 @@
 class ChirpsController < ApplicationController
-  before_action :set_chirp, only: [:show, :update, :destroy, :upvote]
+  before_action :set_chirp, only: [:show, :update, :destroy, :vote]
 
   # GET /chirps
   # GET /chirps.json
   def index
-    @chirps = Chirp.all.order(created_at: :desc)
+    @chirps = Chirp.all
+    # upvotes * 1/amt of days
+    @chirps = @chirps.sort_by do |chirp|
+      days_since_creation = (Time.now - chirp.created_at)/86400
+      (chirp.upvote + 0.05) * 1/days_since_creation
+    end.reverse
   end
 
-  def upvote
-    @chirp.update(upvote: @chirp.upvote + 1)
+  def vote
+    current_amt = @chirp.upvote
+    new_amt = case params[:type]
+      when "up"
+        current_amt + 1
+      when "down"
+        current_amt - 1
+    end
+
+    @chirp.update(upvote: new_amt)
+
+    redirect_to chirps_url, notice: 'Chirp was upvoted'
   end
 
   # GET /chirps/1
